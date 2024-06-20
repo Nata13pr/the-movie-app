@@ -1,10 +1,11 @@
-const baseURL='https://api.themoviedb.org';
+const baseURL='https://api.themoviedb.org/3';
 
 
-const movies='/3/discover/movie';
-const genres='/3/genre/movie/list';
-const search='/3/search';
-const poster='t/p';
+const movies='/discover/movie';
+const genres='/genres/movie/list';
+const search='/search';
+const findById='/movie'
+
 
 const urls={
     movies:{
@@ -16,8 +17,8 @@ const urls={
     search:{
         base:search
     },
-    poster:{
-        base:poster
+    findById:{
+        base:findById
     }
 }
 
