@@ -5,6 +5,6 @@ import {axiosInstance} from "../index";
 import {urls} from "../../constants/urls";
 
 const movieService = {
-    getAll: (): IRes<IPagination<IMovie>> => axiosInstance.get(urls.movies.base)
+    getAll: (page:string): IRes<IPagination<IMovie>> => axiosInstance.get(urls.movies.base,{params:{page:page}})
 }
 export {movieService}

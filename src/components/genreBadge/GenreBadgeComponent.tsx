@@ -1,6 +1,6 @@
 import React from 'react';
 
-const MovieInfoComponent = () => {
+const GenreBadgeComponent = () => {
     return (
         <div>
             
@@ -8,4 +8,4 @@ const MovieInfoComponent = () => {
     );
 };
 
-export default MovieInfoComponent;
+export default GenreBadgeComponent;
