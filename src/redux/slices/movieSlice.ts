@@ -4,19 +4,28 @@ import {IPagination} from "../../interfaces/paginationInterface";
 import {movieService} from "../../services/movie/movieService";
 import {posterService} from "../../services/poster/posterService";
 import {IConfigResponse} from "../../interfaces/IConfigResponse";
+import {IGenreResponse} from "../../interfaces/IGenresResponse";
+import {genreService} from "../../services/genre/genreService";
+import {IGenre} from "../../interfaces/IGenre";
 
 interface IState {
     movies: IMovie[],
-    filteredMovies: IMovie[],
-    movie:IMovie | null,
+    movie: IMovie | null,
     baseImageUrl: string,
+    filteredMovie: IMovie[],
+    totalPages: number,
+    genres: IGenre[],
+    movieFoundByTitle: IMovie[]
 }
 
 let initialState: IState = {
     movies: [],
-    filteredMovies: [],
     baseImageUrl: '',
-    movie:null
+    movie: null,
+    filteredMovie: [],
+    totalPages: 0,
+    genres: [],
+    movieFoundByTitle: []
     //     {
     //     adult: false,
     //     backdrop_path: 'string',
@@ -34,13 +43,55 @@ let initialState: IState = {
     //     vote_count: 0
     // },
 }
+const getAllGenres = createAsyncThunk<IGenreResponse, void>(
+    'movieSlice/getAllGenres',
+    async (_, {rejectWithValue}) => {
+        try {
+            const {data} = await genreService.getAll()
+            return data;
+        } catch (e) {
+            return rejectWithValue(e)
+        }
+    }
+)
+const getByTitle = createAsyncThunk<IPagination<IMovie>, string>(
+    'movieSlice/getByTitle',
+    async (query: string, thunkAPI) => {
+        try {
+            const {data} = await movieService.getByTitle(query);
+            const configResponse=await posterService.getConfiguration();
+            const  baseImageUrl=configResponse.data.images.secure_base_url;
+            console.log('data.results',data.results)
+            const movieWithPosters=data.results.map(movie=>({
+                ...movie,
+                posterUrl:movie.poster_path ? `${baseImageUrl}w300${movie.poster_path}` :null
+            }))
+            return thunkAPI.fulfillWithValue({...data,
+                results:movieWithPosters})
 
+        } catch (e) {
+            return thunkAPI.rejectWithValue(e)
+        }
+    }
+)
 const getAll = createAsyncThunk<IPagination<IMovie>, string>(
     'movieSlice/getAll',
     async (page: string, thunkAPI) => {
         try {
             const {data} = await movieService.getAll(page)
             return thunkAPI.fulfillWithValue(data);
+        } catch (e) {
+            return thunkAPI.rejectWithValue(e)
+        }
+    }
+)
+
+const getAllByGenre = createAsyncThunk<IPagination<IMovie>, { id: string, page: string }>(
+    'movieSlice/getAllByGenre',
+    async ({id, page}, thunkAPI) => {
+        try {
+            const {data} = await movieService.getMoviesByGenre(id, page);
+            return thunkAPI.fulfillWithValue(data)
         } catch (e) {
             return thunkAPI.rejectWithValue(e)
         }
@@ -73,21 +124,12 @@ const getMovieById = createAsyncThunk(
 const movieSlice = createSlice({
     name: 'movieSlice',
     initialState,
-    reducers: {
-        filterMoviesByGenre: (state, action: PayloadAction<string>) => {
-            if (action.payload === 'All') {
-                state.filteredMovies = state.movies;
-            } else {
-                state.filteredMovies = state.movies.filter(movie =>
-                    movie.genres && movie.genres.some(genre => genre.name === action.payload)
-                );
-            }
-        },
-    },
+    reducers: {},
     extraReducers: builder =>
         builder
             .addCase(getAll.fulfilled, (state, action) => {
                 state.movies = action.payload.results;
+                state.totalPages = action.payload.total_pages;
             })
             .addCase(getAll.rejected, (state) => {
                 //
@@ -96,12 +138,23 @@ const movieSlice = createSlice({
             .addCase(getImageUrl.fulfilled, (state, action) => {
                 state.baseImageUrl = action.payload.images.secure_base_url;
 
+
             })
             .addCase(getImageUrl.rejected, (state) => {
                 //
             })
-            .addCase(getMovieById.fulfilled,(state,action)=>{
-                state.movie=action.payload;
+            .addCase(getMovieById.fulfilled, (state, action) => {
+                state.movie = action.payload;
+            })
+            .addCase(getAllByGenre.fulfilled, (state, action) => {
+                state.filteredMovie = action.payload.results;
+                state.totalPages = action.payload.total_pages;
+            })
+            .addCase(getAllGenres.fulfilled, (state, action) => {
+                state.genres = action.payload.genres;
+            })
+            .addCase(getByTitle.fulfilled, (state, action) => {
+                state.movieFoundByTitle = action.payload.results;
             })
 })
 
@@ -111,7 +164,10 @@ const movieActions = {
     ...actions,
     getAll,
     getImageUrl,
-    getMovieById
+    getMovieById,
+    getAllByGenre,
+    getAllGenres,
+    getByTitle
 }
 
 export {
