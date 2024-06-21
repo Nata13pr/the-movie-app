@@ -14,10 +14,11 @@ const PosterPreviewComponent: FC<IProps> = ({movie}) => {
     useEffect(() => {
              async function config() {
             try {
-                if (baseImageUrl) {
+                if (baseImageUrl && movie.poster_path) {
                     const d = await posterService.getPoster(baseImageUrl, movie.poster_path);
-
                     setPoster(d.request.responseURL)
+                }else {
+                    setPoster("https://via.placeholder.com/300x450?text=No+Image")
                 }
             } catch (e) {
 
@@ -31,7 +32,6 @@ const PosterPreviewComponent: FC<IProps> = ({movie}) => {
 
     return (
         <div>
-            <div>{movie.poster_path}</div>
             <img src={poster} alt={movie.title}/>
         </div>
     );

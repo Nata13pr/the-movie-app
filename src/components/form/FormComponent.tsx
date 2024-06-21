@@ -15,7 +15,7 @@ const FormComponent = () => {
 
     const search=(formValue:IFormProps)=>{
         dispatch(movieActions.getByTitle(formValue.name))
-        navigate(`/movies/search/${formValue.name}`);
+        navigate(`/movies/genre/${formValue.name}`);
     }
 
     return (

@@ -8,6 +8,8 @@ import {IGenreResponse} from "../../interfaces/IGenresResponse";
 import {genreService} from "../../services/genre/genreService";
 import {IGenre} from "../../interfaces/IGenre";
 
+
+
 interface IState {
     movies: IMovie[],
     movie: IMovie | null,
@@ -54,26 +56,24 @@ const getAllGenres = createAsyncThunk<IGenreResponse, void>(
         }
     }
 )
+
+
 const getByTitle = createAsyncThunk<IPagination<IMovie>, string>(
     'movieSlice/getByTitle',
     async (query: string, thunkAPI) => {
         try {
-            const {data} = await movieService.getByTitle(query);
-            const configResponse=await posterService.getConfiguration();
-            const  baseImageUrl=configResponse.data.images.secure_base_url;
-            console.log('data.results',data.results)
-            const movieWithPosters=data.results.map(movie=>({
-                ...movie,
-                posterUrl:movie.poster_path ? `${baseImageUrl}w300${movie.poster_path}` :null
-            }))
-            return thunkAPI.fulfillWithValue({...data,
-                results:movieWithPosters})
+            const { data } = await movieService.getByTitle(query);
+            return thunkAPI.fulfillWithValue(data)
+
 
         } catch (e) {
-            return thunkAPI.rejectWithValue(e)
+            console.error(e);
+            return thunkAPI.rejectWithValue(e);
         }
     }
-)
+);
+
+
 const getAll = createAsyncThunk<IPagination<IMovie>, string>(
     'movieSlice/getAll',
     async (page: string, thunkAPI) => {
@@ -155,6 +155,7 @@ const movieSlice = createSlice({
             })
             .addCase(getByTitle.fulfilled, (state, action) => {
                 state.movieFoundByTitle = action.payload.results;
+                state.totalPages=action.payload.total_pages
             })
 })
 
