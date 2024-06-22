@@ -80,7 +80,8 @@ const StyledInputBase = styled(InputBase)(({theme}) => ({
 
 export default function HeaderComponent() {
     return (
-        <Box sx={{flexGrow: 1}}>
+        <Box sx={{flexGrow: 1,
+        backgroundColor:'inherit'}}>
             <AppBar position="static">
                 <Toolbar>
                     <Typography

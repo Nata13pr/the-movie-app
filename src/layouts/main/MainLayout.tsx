@@ -30,7 +30,7 @@ console.log('hello')
 
         <ThemeProvider theme={theme}>
             <Box sx={{ backgroundColor: switcher ? theme.palette.primary.main  : theme.palette.secondary.main , maxWidth: 'xl', mx: 'auto', px: 0 }}>
-                <Container sx={{ backgroundColor: theme.palette.primary.main }}>
+                <Container sx={{ backgroundColor:'inherit'}}>
                     <HeaderComponent />
 
                 <SwitcherComponent/>
