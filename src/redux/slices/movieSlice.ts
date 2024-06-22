@@ -17,7 +17,8 @@ interface IState {
     filteredMovie: IMovie[],
     totalPages: number,
     genres: IGenre[],
-    movieFoundByTitle: IMovie[]
+    movieFoundByTitle: IMovie[],
+    switcher:boolean,
 }
 
 let initialState: IState = {
@@ -27,7 +28,8 @@ let initialState: IState = {
     filteredMovie: [],
     totalPages: 0,
     genres: [],
-    movieFoundByTitle: []
+    movieFoundByTitle: [],
+    switcher:false
     //     {
     //     adult: false,
     //     backdrop_path: 'string',
@@ -124,7 +126,11 @@ const getMovieById = createAsyncThunk(
 const movieSlice = createSlice({
     name: 'movieSlice',
     initialState,
-    reducers: {},
+    reducers: {
+toggleSwitcher:(state)=>{
+    state.switcher=!state.switcher;
+}
+    },
     extraReducers: builder =>
         builder
             .addCase(getAll.fulfilled, (state, action) => {
