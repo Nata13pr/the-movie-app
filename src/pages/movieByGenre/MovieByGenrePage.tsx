@@ -4,7 +4,9 @@ import {useParams, useSearchParams} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks";
 import PaginationComponent from "../../components/pagination/PaginationComponent";
 import {movieActions} from "../../redux/slices/movieSlice";
-import PosterPreviewComponent from "../../components/posterPreview/PosterPreviewComponent";
+import {Box} from "@mui/material";
+import Grid2 from "@mui/material/Unstable_Grid2";
+import MovieComponent from "../../components/movie/MovieComponent";
 
 
 const MoviesByGenrePage: FC = () => {
@@ -24,14 +26,14 @@ const MoviesByGenrePage: FC = () => {
 
     return (
         <div>
-            <h1>Movies in Genre {id}</h1>
-            <ul>
-                {filteredMovie.map((movie) => (
-                    <li key={movie.id}>{movie.title}
-                        <PosterPreviewComponent movie={movie}/>
-                    </li>
-                ))}
-            </ul>
+            <Box>
+                <Grid2 container spacing={1}>
+                    {filteredMovie.map((movie) => (
+                     <MovieComponent movie={movie}/>
+                    ))}
+                </Grid2>
+            </Box>
+
             <PaginationComponent totalPages={totalPages}/>
         </div>
     );

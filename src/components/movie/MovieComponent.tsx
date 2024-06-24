@@ -2,6 +2,7 @@ import React, {FC} from 'react';
 import {IMovie} from "../../interfaces/IMovie";
 import PosterPreviewComponent from "../posterPreview/PosterPreviewComponent";
 import {useNavigate} from "react-router-dom";
+import Grid2 from "@mui/material/Unstable_Grid2";
 
 interface IProps {
     movie: IMovie
@@ -14,11 +15,12 @@ const MovieComponent: FC<IProps> = ({movie}) => {
     }
 
     return (
-        <li onClick={handleClick}>
-            <div>{movie.title}</div>
-            <div>{movie.id}</div>
+        <Grid2
+            key={movie.id}
+            xs={12} sm={6} md={4} lg={3} onClick={handleClick}>
+
             <PosterPreviewComponent movie={movie}/>
-        </li>
+        </Grid2>
     );
 };
 

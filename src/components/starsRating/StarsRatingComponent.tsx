@@ -1,5 +1,7 @@
 import React, {FC} from 'react';
 import StarRatings from "react-star-ratings";
+import {Box, Rating, Typography} from "@mui/material";
+import {indigo} from "@mui/material/colors";
 
 interface IProps{
     rating:number
@@ -11,18 +13,17 @@ const StarsRatingComponent:FC<IProps> = ({rating}) => {
     //     setRating(newRating)
     // }
     return (
-        <>
-            <StarRatings
-                rating={rating}
-                // rating={rating}
-                starRatedColor="#C0B283"
-                // changeRating={changeRating}
-                numberOfStars={10}
-                starDimension="30px"
-                starSpacing="15px"
-                name='rating'/>
-            <p>{rating}</p>
-        </>
+        <Box sx={{ mt: 5 }}>
+            <Rating name="read-only"
+                    value={rating}
+                    readOnly
+                    max={10}
+                    sx={{
+                        fontSize: 50,
+                        color: indigo["500"]
+                    }}/>
+            <Typography component={'p'}>Rating-{rating}</Typography>
+        </Box>
 
     );
 };

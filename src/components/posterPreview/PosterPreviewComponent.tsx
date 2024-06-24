@@ -2,10 +2,20 @@ import React, {FC, useEffect, useState} from 'react';
 import {IMovie} from "../../interfaces/IMovie";
 import {posterService} from "../../services/poster/posterService";
 import {useAppSelector} from "../../hooks/reduxHooks";
-
+import {CardMedia, styled} from "@mui/material";
+import Paper from '@mui/material/Paper';
+import {Card} from "reactstrap";
 interface IProps {
     movie: IMovie
 }
+
+const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+}));
 
 const PosterPreviewComponent: FC<IProps> = ({movie}) => {
     const {baseImageUrl} = useAppSelector(state => state.movie);
@@ -31,9 +41,14 @@ const PosterPreviewComponent: FC<IProps> = ({movie}) => {
     }, [baseImageUrl, movie.poster_path])
 
     return (
-        <div>
-            <img src={poster} alt={movie.title}/>
-        </div>
+        <Card  >
+            <CardMedia
+                component="img"
+                image={poster}
+                alt={movie.title}
+                sx={{ objectFit: 'cover' }} // Додаємо objectFit: 'cover' для заповнення боксу без відступів
+            />
+        </Card >
     );
 };
 

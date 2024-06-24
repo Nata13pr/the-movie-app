@@ -1,6 +1,7 @@
 import React, {FC} from 'react';
 import {Badge} from "reactstrap";
 import {IGenre} from "../../interfaces/IGenre";
+import {Box} from "@mui/material";
 
 interface IProps {
   genres:IGenre[]
@@ -17,7 +18,7 @@ const GenreBadgeComponent: FC<IProps> = ({genres}) => {
         return color;
     };
     return (
-        <div>
+        <Box sx={{ mt: 3 }}>
             {genres.map((genre) => (
                 <Badge
                     key={genre.id}
@@ -28,7 +29,7 @@ const GenreBadgeComponent: FC<IProps> = ({genres}) => {
                     {genre.name}
                 </Badge>
             ))}
-        </div>
+        </Box>
     );
 };
 

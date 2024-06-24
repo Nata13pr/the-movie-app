@@ -3,6 +3,10 @@ import {useAppSelector} from "../../hooks/reduxHooks";
 import {posterService} from "../../services/poster/posterService";
 import StarsRatingComponent from "../starsRating/StarsRatingComponent";
 import GenreBadgeComponent from "../genreBadge/GenreBadgeComponent";
+import PosterPreviewComponent from "../posterPreview/PosterPreviewComponent";
+import MovieInfoComponent from "../movieInfo/MovieInfoComponent";
+import Grid2 from "@mui/material/Unstable_Grid2";
+import {Box, CardMedia} from "@mui/material";
 
 const MoviesListCardComponent = () => {
     const {movie} = useAppSelector(state => state.movie);
@@ -20,18 +24,21 @@ const MoviesListCardComponent = () => {
         getPicture()
     }, [baseImageUrl, movie]);
     return (
-        <div>
+        <Box sx={{ mt: 4 }}>
 
-            {movie && (<>
-                    <h2>{movie.title}</h2>
-                    <img src={poster} alt={movie.title}/>
-                    <p>{movie.overview}</p>
-                    <GenreBadgeComponent genres={movie.genres}/>
-                    <StarsRatingComponent rating={movie.vote_average}/>
-                </>
+            {movie && (
+                <Grid2 container spacing={2}>
+                    {/*<PosterPreviewComponent movie={movie} />*/}
+                    <Grid2 xs={12} md={6} >
+                        <img src={poster} alt={movie.title} style={{maxWidth: '100%', height: 'auto',marginLeft: 70}}/>
+                        {/*<img src={poster} alt={movie.title}/>*/}
+                    </Grid2>
+                    <Grid2 xs={12} md={6}><MovieInfoComponent movie={movie}/></Grid2>
+
+                    </Grid2>
             )}
 
-        </div>
+        </Box>
     );
 };
 

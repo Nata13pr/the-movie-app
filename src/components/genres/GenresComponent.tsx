@@ -3,7 +3,7 @@ import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks";
 
 import GenreComponent from "../genre/GenreComponent";
 import {Button, Menu} from "@mui/material";
-import theme from "../../theme/theme";
+
 
 
 const GenresComponent = () => {
@@ -25,10 +25,10 @@ const GenresComponent = () => {
                 aria-haspopup="true"
                 aria-expanded={open ? 'true' : undefined}
                 onClick={handleClick}
-                sx={{
-                    backgroundColor: theme.palette.primary.light,
-                    color: theme.palette.secondary.contrastText
-            }}
+            //     sx={{
+            //         backgroundColor: theme.palette.primary.light,
+            //         color: theme.palette.secondary.contrastText
+            // }}
 
             >
                 Genres
