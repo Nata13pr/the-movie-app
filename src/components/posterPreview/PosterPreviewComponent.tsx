@@ -1,9 +1,7 @@
 import React, {FC, useEffect, useState} from 'react';
 import {Card} from "reactstrap";
-import {CardMedia, styled} from "@mui/material";
-import Paper from '@mui/material/Paper';
+import {CardMedia} from "@mui/material";
 
-import {IMovie} from "../../interfaces/IMovie";
 import {posterService} from "../../services/poster/posterService";
 import {useAppSelector} from "../../hooks/reduxHooks";
 
@@ -11,14 +9,6 @@ import {useAppSelector} from "../../hooks/reduxHooks";
 interface IProps {
     path: string
 }
-
-const Item = styled(Paper)(({theme}) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-}));
 
 const PosterPreviewComponent: FC<IProps> = ({path}) => {
     const {baseImageUrl} = useAppSelector(state => state.movie);
@@ -41,7 +31,7 @@ const PosterPreviewComponent: FC<IProps> = ({path}) => {
         }
 
         config()
-    }, [baseImageUrl,path])
+    }, [baseImageUrl, path])
 
     return (
         <Card>

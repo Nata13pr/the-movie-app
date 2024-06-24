@@ -9,7 +9,6 @@ import {IGenreResponse} from "../../interfaces/IGenresResponse";
 import {genreService} from "../../services/genre/genreService";
 import {IGenre} from "../../interfaces/IGenre";
 
-
 interface IState {
     movies: IMovie[],
     movie: IMovie | null,
@@ -44,7 +43,6 @@ const getAllGenres = createAsyncThunk<IGenreResponse, void>(
     }
 )
 
-
 const getByTitle = createAsyncThunk<IPagination<IMovie>, string>(
     'movieSlice/getByTitle',
     async (query: string, thunkAPI) => {
@@ -57,7 +55,6 @@ const getByTitle = createAsyncThunk<IPagination<IMovie>, string>(
         }
     }
 );
-
 
 const getAll = createAsyncThunk<IPagination<IMovie>, string>(
     'movieSlice/getAll',

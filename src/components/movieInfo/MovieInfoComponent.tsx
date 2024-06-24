@@ -1,17 +1,17 @@
-import React, { FC } from 'react';
-import { Box, Typography } from "@mui/material";
+import React, {FC} from 'react';
+import {Box, Typography} from "@mui/material";
 
 import GenreBadgeComponent from "../genreBadge/GenreBadgeComponent";
 import StarsRatingComponent from "../starsRating/StarsRatingComponent";
-import { IMovie } from "../../interfaces/IMovie";
+import {IMovie} from "../../interfaces/IMovie";
 
 interface IProps {
     movie: IMovie
 }
 
-const MovieInfoComponent: FC<IProps> = ({ movie }) => {
+const MovieInfoComponent: FC<IProps> = ({movie}) => {
     return (
-        <Box sx={{ mt: 2, mr: 4 }}>
+        <Box sx={{mt: 2, mr: 4}}>
             <Typography
                 component={'h1'}
                 variant={'h2'}
@@ -25,20 +25,20 @@ const MovieInfoComponent: FC<IProps> = ({ movie }) => {
             </Typography>
             <Typography
                 component={'p'}
-                sx={{ mt: 1 }}
+                sx={{mt: 1}}
             >
                 {movie.overview}
             </Typography>
             <Typography
                 component={'p'}
                 variant={"overline"}
-                sx={{ mt: 1 }}
+                sx={{mt: 1}}
             >
                 Date of release - {movie.release_date}
             </Typography>
 
-            <GenreBadgeComponent genres={movie.genres} />
-            <StarsRatingComponent rating={movie.vote_average} />
+            <GenreBadgeComponent genres={movie.genres}/>
+            <StarsRatingComponent rating={movie.vote_average}/>
         </Box>
     );
 };

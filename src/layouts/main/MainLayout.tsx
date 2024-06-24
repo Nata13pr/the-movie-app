@@ -1,11 +1,11 @@
 import React from 'react';
 import {Outlet} from "react-router-dom";
-import {Box, Container,  ThemeProvider} from "@mui/material";
+import {Box, Container, ThemeProvider} from "@mui/material";
 
 import HeaderComponent from "../../components/header/HeaderComponent";
 import FooterComponent from "../../components/footer/FooterComponent";
 import {darkTheme, lightTheme} from "../../theme/theme";
-import { useAppSelector} from "../../hooks/reduxHooks";
+import {useAppSelector} from "../../hooks/reduxHooks";
 
 const MainLayout = () => {
 
@@ -20,10 +20,10 @@ const MainLayout = () => {
                 px: 0
             }}>
                 <Container sx={{backgroundColor: 'inherit'}}>
-                <HeaderComponent/>
+                    <HeaderComponent/>
                     <Outlet/>
-                <FooterComponent/>
-            </Container>
+                    <FooterComponent/>
+                </Container>
             </Box>
         </ThemeProvider>
 

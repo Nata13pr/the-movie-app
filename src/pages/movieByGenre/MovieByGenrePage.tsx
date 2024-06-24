@@ -11,7 +11,7 @@ import MovieComponent from "../../components/movie/MovieComponent";
 
 const MoviesByGenrePage: FC = () => {
     const {id} = useParams<{ id: string }>();
-    const [query,setQuery]=useSearchParams();
+    const [query, setQuery] = useSearchParams();
     const {filteredMovie} = useAppSelector(state => state.movie);
     const {totalPages} = useAppSelector(state => state.movie)
 
@@ -21,20 +21,25 @@ const MoviesByGenrePage: FC = () => {
         if (id) {
             dispatch(movieActions.getAllByGenre({id, page: query.get('page') || '1'}))
         }
-    }, [id, dispatch,query]);
+    }, [id, dispatch, query]);
 
 
     return (
         <div>
             <Box>
-                <Grid2 container spacing={1}>
+                <Grid2
+                    container
+                    spacing={1}>
                     {filteredMovie.map((movie) => (
-                     <MovieComponent movie={movie}  key={movie.id}/>
+                        <MovieComponent
+                            movie={movie}
+                            key={movie.id}/>
                     ))}
                 </Grid2>
             </Box>
 
-            <PaginationComponent totalPages={totalPages}/>
+            <PaginationComponent
+                totalPages={totalPages}/>
         </div>
     );
 };

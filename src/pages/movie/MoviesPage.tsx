@@ -7,17 +7,16 @@ import MoviesLIstComponent from "../../components/movieList/MoviesLIstComponent"
 import PaginationComponent from "../../components/pagination/PaginationComponent";
 
 
-
 const MoviesPage = () => {
-    const [query,setQuery]=useSearchParams();
-    const {totalPages}=useAppSelector(state => state.movie)
-  const dispatch = useAppDispatch()
+    const [query, setQuery] = useSearchParams();
+    const {totalPages} = useAppSelector(state => state.movie)
+    const dispatch = useAppDispatch()
 
     useEffect(() => {
         dispatch(movieActions.getAll(query.get('page') || '1'));
         dispatch(movieActions.getAllGenres());
         dispatch(movieActions.getImageUrl())
-    }, [dispatch,query]);
+    }, [dispatch, query]);
 
     return (
         <div>

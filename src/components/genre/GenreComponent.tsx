@@ -1,8 +1,8 @@
 import {FC,} from "react";
 import {useNavigate} from "react-router-dom";
 import {MenuItem} from "@mui/material";
-import {useAppDispatch,} from "../../hooks/reduxHooks";
 
+import {useAppDispatch,} from "../../hooks/reduxHooks";
 import {IGenre} from "../../interfaces/IGenre";
 import {movieActions} from "../../redux/slices/movieSlice";
 
@@ -32,7 +32,6 @@ const GenreComponent: FC<IProps> = ({genre, handleClose}) => {
             <h3 onClick={handleGenreClick} style={{cursor: "pointer"}}>
                 {genre.name}
             </h3>
-
         </MenuItem>
     );
 };

@@ -10,7 +10,7 @@ const MoviesLIstComponent = () => {
 
     const {movies} = useAppSelector(state => state.movie)
     return (
-        <Box sx={{marginTop:1}}>
+        <Box sx={{marginTop: 1}}>
             <Grid2 container spacing={1}>
                 {movies.map(movie => <MovieComponent
                     key={movie.id}

@@ -18,10 +18,9 @@ const router = createBrowserRouter([
             {path: 'movies/:id', element: <CardPage/>},
             {path: 'movies/genre/:id', element: <MovieByGenrePage/>},
             {path: 'movies/search/:title', element: <MoviesByTitlePage/>},
-            {path: 'tvshow', element: <TvShowPage/>},
+            {path: 'tv-show', element: <TvShowPage/>},
         ]
     }
-
 ])
 
 export {

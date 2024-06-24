@@ -26,7 +26,7 @@ const HeaderComponent = () => {
                             aria-label="open drawer"
                             sx={{
                                 mr: 2,
-                                backgroundColor: 'transparent', // Updated to transparent
+                                backgroundColor: 'transparent',
                                 color: switcher ? lightTheme.palette.primary.light : darkTheme.palette.secondary.main,
                             }}
                         >
@@ -42,11 +42,11 @@ const HeaderComponent = () => {
                             aria-label="open drawer"
                             sx={{
                                 mr: 40,
-                                backgroundColor: 'transparent', // Updated to transparent
+                                backgroundColor: 'transparent',
                                 color: switcher ? lightTheme.palette.primary.light : darkTheme.palette.secondary.main,
                             }}
                         >
-                            <Link href="/tvshow" underline="hover" color="inherit">
+                            <Link href="/tv-show" underline="hover" color="inherit">
                                 TV Show
                             </Link>
                         </IconButton>
