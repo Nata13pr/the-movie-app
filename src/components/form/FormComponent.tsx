@@ -1,47 +1,18 @@
-// import React from 'react';
-// import {useForm} from "react-hook-form";
-// import {useNavigate} from "react-router-dom";
-// import {useAppDispatch} from "../../hooks/reduxHooks";
-// import {movieActions} from "../../redux/slices/movieSlice";
-//
-// interface IFormProps{
-//     name:string
-// }
-// const FormComponent = () => {
-//     const navigate = useNavigate();
-//     let{register,handleSubmit,formState:{errors,isValid}}=useForm<IFormProps>()
-//
-//     const dispatch=useAppDispatch()
-//
-//     const search=(formValue:IFormProps)=>{
-//         dispatch(movieActions.getByTitle(formValue.name))
-//         navigate(`/movies/search/${formValue.name}`);
-//     }
-//
-//     return (
-//         <div>
-//             <form onSubmit={handleSubmit(search)}>
-//                 <input type={'text'} {...register('name')}/>
-//                 <button>Search</button>
-//             </form>
-//         </div>
-//     );
-// };
-//
-// export default FormComponent;
 import React from 'react';
-import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../../hooks/reduxHooks";
-import { movieActions } from "../../redux/slices/movieSlice";
-import { IconButton, InputBase, styled, alpha, Box } from "@mui/material";
+import {useForm} from "react-hook-form";
+import {useNavigate} from "react-router-dom";
+import {IconButton, InputBase, styled, alpha, Box} from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
+
+import {useAppDispatch} from "../../hooks/reduxHooks";
+import {movieActions} from "../../redux/slices/movieSlice";
+
 
 interface IFormProps {
     name: string
 }
 
-const Search = styled('div')(({ theme }) => ({
+const Search = styled('div')(({theme}) => ({
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
     backgroundColor: alpha(theme.palette.common.white, 0.15),
@@ -56,7 +27,7 @@ const Search = styled('div')(({ theme }) => ({
     },
 }));
 
-const SearchIconWrapper = styled('div')(({ theme }) => ({
+const SearchIconWrapper = styled('div')(({theme}) => ({
     padding: theme.spacing(0, 2),
     height: '100%',
     position: 'absolute',
@@ -65,7 +36,7 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
     justifyContent: 'center',
 }));
 
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
+const StyledInputBase = styled(InputBase)(({theme}) => ({
     color: 'inherit',
     width: '100%',
     '& .MuiInputBase-input': {
@@ -83,11 +54,15 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 const FormComponent = () => {
     const navigate = useNavigate();
-    const { register, handleSubmit, formState: { errors, isValid } } = useForm<IFormProps>();
+
+    const {register, handleSubmit, formState: {errors, isValid}} = useForm<IFormProps>();
+
     const dispatch = useAppDispatch();
 
     const search = (formValue: IFormProps) => {
+
         dispatch(movieActions.getByTitle(formValue.name));
+
         navigate(`/movies/search/${formValue.name}`);
     }
 
@@ -95,13 +70,15 @@ const FormComponent = () => {
         <Box component="form" onSubmit={handleSubmit(search)}>
             <Search>
                 <SearchIconWrapper>
-                    <IconButton type="submit" aria-label="search">
-                        <SearchIcon />
+                    <IconButton
+                        type="submit"
+                        aria-label="search">
+                        <SearchIcon/>
                     </IconButton>
                 </SearchIconWrapper>
                 <StyledInputBase
                     placeholder="Search…"
-                    inputProps={{ 'aria-label': 'search' }}
+                    inputProps={{'aria-label': 'search'}}
                     {...register('name')}
                 />
             </Search>

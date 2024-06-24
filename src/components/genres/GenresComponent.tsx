@@ -1,22 +1,24 @@
-import React, {useEffect} from 'react';
-import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks";
-
-import GenreComponent from "../genre/GenreComponent";
+import React from 'react';
 import {Button, Menu} from "@mui/material";
 
+import {useAppSelector} from "../../hooks/reduxHooks";
+import GenreComponent from "../genre/GenreComponent";
 
 
 const GenresComponent = () => {
-    const {genres}=useAppSelector(state => state.movie);
+    const {genres} = useAppSelector(state => state.movie);
 
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
+
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
     };
+
     const handleClose = () => {
         setAnchorEl(null);
     };
+
     return (
         <div>
             <Button
@@ -25,11 +27,6 @@ const GenresComponent = () => {
                 aria-haspopup="true"
                 aria-expanded={open ? 'true' : undefined}
                 onClick={handleClick}
-            //     sx={{
-            //         backgroundColor: theme.palette.primary.light,
-            //         color: theme.palette.secondary.contrastText
-            // }}
-
             >
                 Genres
             </Button>
@@ -48,7 +45,10 @@ const GenresComponent = () => {
                     horizontal: 'left',
                 }}
             >
-                {genres.map(genre=><GenreComponent key={genre.id} genre={genre} handleClose={handleClose} />)}
+                {genres.map(genre => <GenreComponent
+                    key={genre.id}
+                    genre={genre}
+                    handleClose={handleClose}/>)}
             </Menu>
 
         </div>

@@ -23,7 +23,6 @@ const MoviesPage = () => {
 
     return (
         <div>
-            <UserInfoComponent/>
             <MoviesLIstComponent/>
             <PaginationComponent totalPages={totalPages}/>
         </div>

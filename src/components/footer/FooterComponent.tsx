@@ -1,10 +1,11 @@
 import React from 'react';
+import {Box} from "@mui/material";
 
 const FooterComponent = () => {
     return (
-        <div>
-            Footer
-        </div>
+        <Box sx={{backgroundColor:'inherit'}}>
+           Best movies ever!
+        </Box>
     );
 };
 

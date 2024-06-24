@@ -4,17 +4,19 @@ import Grid2 from "@mui/material/Unstable_Grid2";
 
 import {useAppSelector} from "../../hooks/reduxHooks";
 import MovieComponent from "../movie/MovieComponent";
+import TVComponent from "../tv/TVComponent";
 
 
 const MoviesLIstComponent = () => {
 
-    const {movies} = useAppSelector(state => state.movie)
+    const {tv} = useAppSelector(state => state.tv)
+    console.log(tv,'1111111111111111111111111111111111')
     return (
         <Box>
             <Grid2 container spacing={1}>
-                {movies.map(movie => <MovieComponent
-                    key={movie.id}
-                    movie={movie}/>)}
+                {tv.map(tvs => <TVComponent
+                    key={tvs.id}
+                    tv={tvs}/>)}
             </Grid2>
 
         </Box>

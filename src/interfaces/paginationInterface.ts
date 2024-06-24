@@ -1,5 +1,4 @@
-
-export interface IPagination<T>{
+export interface IPagination<T> {
     page: string,
     results: T[],
     total_pages: number,

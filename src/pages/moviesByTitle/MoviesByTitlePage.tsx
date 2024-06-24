@@ -12,7 +12,7 @@ const MoviesByTitlePage = () => {
     const {movieFoundByTitle} = useAppSelector(state => state.movie)
 
 
-
+console.log(movieFoundByTitle,'.........................................')
     return (
 
     <Box>

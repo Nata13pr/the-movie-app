@@ -1,24 +1,26 @@
-const baseURL='https://api.themoviedb.org/3';
+const baseURL = 'https://api.themoviedb.org/3';
 
+const movies = '/discover/movie';
+const tv='/discover/tv';
+const genres = '/genre/movie/list';
+const search = '/search/multi';
+const findById = '/movie'
 
-const movies='/discover/movie';
-const genres='/genre/movie/list';
-const search='/search/multi';
-const findById='/movie'
-
-
-const urls={
-    movies:{
-        base:movies
+const urls = {
+    movies: {
+        base: movies
     },
-    genres:{
+    tv:{
+        base:tv
+    },
+    genres: {
         base: genres
     },
-    search:{
-        base:search
+    search: {
+        base: search
     },
-    findById:{
-        base:findById
+    findById: {
+        base: findById
     }
 }
 

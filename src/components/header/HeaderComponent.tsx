@@ -1,40 +1,17 @@
-// import React from 'react';
-// import {Link} from "react-router-dom";
-// import style from './Header.module.css'
-// import FormComponent from "../form/FormComponent";
-// import GenreComponent from "../genre/GenreComponent";
-// import GenresComponent from "../genres/GenresComponent";
-//
-// const HeaderComponent = () => {
-//     return (
-//         <div
-//             className={style.Header}
-//         >
-//             <Link to={'/'}>Home</Link>
-//             <Link to={'tvshow'}>TV Show</Link>
-//             <div>
-//                 <FormComponent/>
-//             </div>
-//             <GenresComponent/>
-//         </div>
-//     );
-// };
-//
-// export default HeaderComponent;
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { Switch, Box, AppBar, Toolbar, Typography, IconButton, Link } from '@mui/material';
+import {ThemeProvider} from '@mui/material/styles';
+import {Switch, Box, AppBar, Toolbar, Typography, IconButton, Link} from '@mui/material';
+
 import {useAppDispatch, useAppSelector} from '../../hooks/reduxHooks';
 import GenresComponent from '../genres/GenresComponent';
 import FormComponent from '../form/FormComponent';
-import { lightTheme, darkTheme } from '../../theme/theme';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
+import {lightTheme, darkTheme} from '../../theme/theme';
 import {movieActions} from "../../redux/slices/movieSlice";
+import UserInfoComponent from "../userInfo/UserInfoComponent";
 
 const HeaderComponent = () => {
     const dispatch = useAppDispatch();
-    const { switcher } = useAppSelector(state => state.movie);
+    const {switcher} = useAppSelector(state => state.movie);
 
     const handleThemeChange = () => {
         dispatch(movieActions.toggleSwitcher());
@@ -42,18 +19,19 @@ const HeaderComponent = () => {
 
     return (
         <ThemeProvider theme={switcher ? darkTheme : lightTheme}>
-            <CssBaseline />
-            <Box sx={{ flexGrow: 1, backgroundColor: 'inherit' }}>
+            <Box sx={{flexGrow: 1, backgroundColor: 'inherit'}}>
                 <AppBar position="static">
                     <Toolbar>
-                        <Typography
-                            variant="h6"
-                            noWrap
-                            component="div"
-                            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
-                        >
-                            LOGO
-                        </Typography>
+
+                        {/*<Typography*/}
+                        {/*    variant="h6"*/}
+                        {/*    noWrap*/}
+                        {/*    component="div"*/}
+                        {/*    sx={{flexGrow: 1, display: {xs: 'none', sm: 'block'}}}*/}
+                        {/*>*/}
+                        {/*    LOGO*/}
+                        {/*</Typography>*/}
+                        <UserInfoComponent/>
 
                         <IconButton
                             size="large"
@@ -68,6 +46,7 @@ const HeaderComponent = () => {
                         >
                             <Link href={'/'} underline="hover">Home</Link>
                         </IconButton>
+
                         <IconButton
                             size="large"
                             edge="start"
@@ -80,6 +59,7 @@ const HeaderComponent = () => {
                         >
                             <Link href={'/tvshow'} underline="hover">TV Show</Link>
                         </IconButton>
+
                         <IconButton
                             size="large"
                             edge="start"
@@ -90,10 +70,10 @@ const HeaderComponent = () => {
                                 color: darkTheme.palette.secondary.main
                             }}
                         >
-                            <GenresComponent />
+                            <GenresComponent/>
                         </IconButton>
-                        <FormComponent />
-                        <Switch checked={switcher} onChange={handleThemeChange} />
+                        <FormComponent/>
+                        <Switch checked={switcher} onChange={handleThemeChange}/>
                     </Toolbar>
                 </AppBar>
             </Box>

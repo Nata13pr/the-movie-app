@@ -1,3 +1,3 @@
-export interface IImagesUrl{
-    secure_base_url:string
+export interface IImagesUrl {
+    secure_base_url: string
 }

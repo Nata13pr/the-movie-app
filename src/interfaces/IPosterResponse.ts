@@ -1,5 +1,5 @@
 import {IPoster} from "./IPoster";
 
-export interface IPosterResponse{
-    request:IPoster
+export interface IPosterResponse {
+    request: IPoster
 }

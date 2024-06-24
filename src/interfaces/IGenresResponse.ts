@@ -1,5 +1,5 @@
 import {IGenre} from "./IGenre";
 
-export interface IGenreResponse{
-    genres:IGenre[];
+export interface IGenreResponse {
+    genres: IGenre[];
 }
