@@ -1,10 +1,9 @@
-import React, {useEffect} from 'react';
-import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks";
-import PosterPreviewComponent from "../../components/posterPreview/PosterPreviewComponent";
+import React from 'react';
+import { useAppSelector} from "../../hooks/reduxHooks";
+
 import {Box} from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2";
-import {useNavigate} from "react-router-dom";
-import {movieActions} from "../../redux/slices/movieSlice";
+
 import MovieComponent from "../../components/movie/MovieComponent";
 
 
@@ -12,7 +11,7 @@ const MoviesByTitlePage = () => {
     const {movieFoundByTitle} = useAppSelector(state => state.movie)
 
 
-console.log(movieFoundByTitle,'.........................................')
+
     return (
 
     <Box>
