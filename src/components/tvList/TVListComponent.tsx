@@ -10,7 +10,7 @@ import TVComponent from "../tv/TVComponent";
 const MoviesLIstComponent = () => {
 
     const {tv} = useAppSelector(state => state.tv)
-    console.log(tv,'1111111111111111111111111111111111')
+
     return (
         <Box>
             <Grid2 container spacing={1}>
