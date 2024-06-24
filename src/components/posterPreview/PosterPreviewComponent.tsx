@@ -9,7 +9,7 @@ import {useAppSelector} from "../../hooks/reduxHooks";
 
 
 interface IProps {
-    movie: IMovie
+    path: string
 }
 
 const Item = styled(Paper)(({theme}) => ({
@@ -20,7 +20,7 @@ const Item = styled(Paper)(({theme}) => ({
     color: theme.palette.text.secondary,
 }));
 
-const PosterPreviewComponent: FC<IProps> = ({movie}) => {
+const PosterPreviewComponent: FC<IProps> = ({path}) => {
     const {baseImageUrl} = useAppSelector(state => state.movie);
     const [poster, setPoster] = useState<string>('movie');
 
@@ -29,8 +29,8 @@ const PosterPreviewComponent: FC<IProps> = ({movie}) => {
         async function config() {
 
             try {
-                if (baseImageUrl && movie.poster_path) {
-                    const d = await posterService.getPoster(baseImageUrl, movie.poster_path);
+                if (baseImageUrl && path) {
+                    const d = await posterService.getPoster(baseImageUrl, path);
                     setPoster(d.request.responseURL)
                 } else {
                     setPoster("https://via.placeholder.com/300x450?text=No+Image")
@@ -41,14 +41,14 @@ const PosterPreviewComponent: FC<IProps> = ({movie}) => {
         }
 
         config()
-    }, [baseImageUrl, movie.poster_path])
+    }, [baseImageUrl,path])
 
     return (
         <Card>
             <CardMedia
                 component="img"
                 image={poster}
-                alt={movie.title}
+                alt={'poster'}
                 sx={{objectFit: 'cover'}}
             />
         </Card>

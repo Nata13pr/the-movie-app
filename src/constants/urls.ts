@@ -4,7 +4,8 @@ const movies = '/discover/movie';
 const tv='/discover/tv';
 const genres = '/genre/movie/list';
 const search = '/search/multi';
-const findById = '/movie'
+const findById = '/movie';
+
 
 const urls = {
     movies: {
@@ -21,7 +22,8 @@ const urls = {
     },
     findById: {
         base: findById
-    }
+    },
+
 }
 
 export {

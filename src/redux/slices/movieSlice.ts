@@ -1,5 +1,6 @@
+import {createAsyncThunk, createSlice,} from "@reduxjs/toolkit";
+
 import {IMovie} from "../../interfaces/IMovie";
-import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {IPagination} from "../../interfaces/paginationInterface";
 import {movieService} from "../../services/movie/movieService";
 import {posterService} from "../../services/poster/posterService";
@@ -7,7 +8,6 @@ import {IConfigResponse} from "../../interfaces/IConfigResponse";
 import {IGenreResponse} from "../../interfaces/IGenresResponse";
 import {genreService} from "../../services/genre/genreService";
 import {IGenre} from "../../interfaces/IGenre";
-
 
 
 interface IState {
@@ -18,7 +18,7 @@ interface IState {
     totalPages: number,
     genres: IGenre[],
     movieFoundByTitle: IMovie[],
-    switcher:boolean,
+    switcher: boolean,
 }
 
 let initialState: IState = {
@@ -29,23 +29,8 @@ let initialState: IState = {
     totalPages: 0,
     genres: [],
     movieFoundByTitle: [],
-    switcher:false
-    //     {
-    //     adult: false,
-    //     backdrop_path: 'string',
-    //     genre_ids: [],
-    //     id: 0,
-    //     original_language: 'string',
-    //     original_title: 'string',
-    //     overview: 'string',
-    //     popularity: 0,
-    //     poster_path: 'string',
-    //     release_date: 'string',
-    //     title: 'string',
-    //     video: false,
-    //     vote_average: 0,
-    //     vote_count: 0
-    // },
+    switcher: false
+
 }
 const getAllGenres = createAsyncThunk<IGenreResponse, void>(
     'movieSlice/getAllGenres',
@@ -64,10 +49,8 @@ const getByTitle = createAsyncThunk<IPagination<IMovie>, string>(
     'movieSlice/getByTitle',
     async (query: string, thunkAPI) => {
         try {
-            const { data } = await movieService.getByTitle(query);
+            const {data} = await movieService.getByTitle(query);
             return thunkAPI.fulfillWithValue(data)
-
-
         } catch (e) {
             console.error(e);
             return thunkAPI.rejectWithValue(e);
@@ -111,7 +94,7 @@ const getImageUrl = createAsyncThunk<IConfigResponse, void>(
         }
     }
 )
-const getMovieById = createAsyncThunk(
+const getMovieById = createAsyncThunk<IMovie, string>(
     'movieSlice/getMovieById',
     async (id: string, thunkAPI) => {
         try {
@@ -128,9 +111,9 @@ const movieSlice = createSlice({
     name: 'movieSlice',
     initialState,
     reducers: {
-toggleSwitcher:(state)=>{
-    state.switcher=!state.switcher;
-}
+        toggleSwitcher: (state) => {
+            state.switcher = !state.switcher;
+        }
     },
     extraReducers: builder =>
         builder
@@ -144,8 +127,6 @@ toggleSwitcher:(state)=>{
 
             .addCase(getImageUrl.fulfilled, (state, action) => {
                 state.baseImageUrl = action.payload.images.secure_base_url;
-
-
             })
             .addCase(getImageUrl.rejected, (state) => {
                 //
@@ -153,16 +134,28 @@ toggleSwitcher:(state)=>{
             .addCase(getMovieById.fulfilled, (state, action) => {
                 state.movie = action.payload;
             })
+            .addCase(getMovieById.rejected, (state) => {
+                //
+            })
             .addCase(getAllByGenre.fulfilled, (state, action) => {
                 state.filteredMovie = action.payload.results;
                 state.totalPages = action.payload.total_pages;
             })
+            .addCase(getAllByGenre.rejected, (state) => {
+                //
+            })
             .addCase(getAllGenres.fulfilled, (state, action) => {
                 state.genres = action.payload.genres;
             })
+            .addCase(getAllGenres.rejected, (state) => {
+                //
+            })
             .addCase(getByTitle.fulfilled, (state, action) => {
                 state.movieFoundByTitle = action.payload.results;
-                state.totalPages=action.payload.total_pages
+                state.totalPages = action.payload.total_pages
+            })
+            .addCase(getByTitle.rejected, (state) => {
+                //
             })
 })
 

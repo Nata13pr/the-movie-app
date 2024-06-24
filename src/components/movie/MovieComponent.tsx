@@ -25,7 +25,7 @@ const MovieComponent: FC<IProps> = ({movie}) => {
             xs={12} sm={6} md={4} lg={3} onClick={handleClick}>
             {/*<Badge badgeContent={r} color="primary">*/}
             {/*</Badge>*/}
-            <PosterPreviewComponent movie={movie}/>
+            <PosterPreviewComponent path={movie.poster_path}/>
         </Grid2>
     );
 };

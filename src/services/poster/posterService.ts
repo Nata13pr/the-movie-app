@@ -1,4 +1,5 @@
 import axios, {AxiosResponse} from "axios";
+
 import {IConfigResponse} from "../../interfaces/IConfigResponse";
 import {IPosterResponse} from "../../interfaces/IPosterResponse";
 
@@ -11,8 +12,10 @@ const options = {
     }
 };
 const posterService = {
-    getConfiguration: (): Promise<AxiosResponse<IConfigResponse>> => axios.get<IConfigResponse>(url, options),
-    getPoster: (base: string, path: string): Promise<AxiosResponse<IPosterResponse>> => axios.get<IPosterResponse>(base + '/w300' + path)
+    getConfiguration: (): Promise<AxiosResponse<IConfigResponse>> =>
+        axios.get<IConfigResponse>(url, options),
+    getPoster: (base: string, path: string): Promise<AxiosResponse<IPosterResponse>> =>
+        axios.get<IPosterResponse>(base + '/w300' + path)
 }
 
 export {

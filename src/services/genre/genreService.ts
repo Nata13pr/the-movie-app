@@ -4,8 +4,9 @@ import {axiosInstance} from "../index";
 import {urls} from "../../constants/urls";
 
 const genreService = {
-    getAll: (): IRes<IGenreResponse> => axiosInstance.get<IGenreResponse>(urls.genres.base),
-   }
+    getAll: (): IRes<IGenreResponse> =>
+        axiosInstance.get<IGenreResponse>(urls.genres.base),
+}
 
 export {genreService}
 
