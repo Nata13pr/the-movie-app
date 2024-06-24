@@ -1,13 +1,11 @@
 import React, {useEffect} from 'react';
+import {useSearchParams} from "react-router-dom";
+
 import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks";
 import {movieActions} from "../../redux/slices/movieSlice";
 import MoviesLIstComponent from "../../components/movieList/MoviesLIstComponent";
-
-import UserInfoComponent from "../../components/userInfo/UserInfoComponent";
-import {useSearchParams} from "react-router-dom";
 import PaginationComponent from "../../components/pagination/PaginationComponent";
-import GenreComponent from "../../components/genres/GenresComponent";
-import FormComponent from "../../components/form/FormComponent";
+
 
 
 const MoviesPage = () => {

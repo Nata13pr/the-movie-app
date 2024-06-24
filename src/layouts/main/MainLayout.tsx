@@ -1,22 +1,17 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {Outlet} from "react-router-dom";
 import {Box, Container,  ThemeProvider} from "@mui/material";
 
 import HeaderComponent from "../../components/header/HeaderComponent";
 import FooterComponent from "../../components/footer/FooterComponent";
 import {darkTheme, lightTheme} from "../../theme/theme";
-import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks";
+import { useAppSelector} from "../../hooks/reduxHooks";
 
 const MainLayout = () => {
-    const dispatch = useAppDispatch();
+
     const {switcher} = useAppSelector(state => state.movie);
 
-    // useEffect(() => {
-    //
-    // }, [switcher, dispatch]);
-    //
     return (
-
 
         <ThemeProvider theme={switcher ? darkTheme : lightTheme}>
             <Box sx={{

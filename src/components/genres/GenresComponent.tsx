@@ -3,11 +3,12 @@ import {Button, Menu} from "@mui/material";
 
 import {useAppSelector} from "../../hooks/reduxHooks";
 import GenreComponent from "../genre/GenreComponent";
+import {darkTheme, lightTheme} from "../../theme/theme";
 
 
 const GenresComponent = () => {
     const {genres} = useAppSelector(state => state.movie);
-
+    const { switcher } = useAppSelector(state => state.movie);
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
 
@@ -27,6 +28,8 @@ const GenresComponent = () => {
                 aria-haspopup="true"
                 aria-expanded={open ? 'true' : undefined}
                 onClick={handleClick}
+                sx={{backgroundColor: 'transparent', // Updated to transparent
+                    color: switcher ? lightTheme.palette.primary.light : darkTheme.palette.secondary.main}}
             >
                 Genres
             </Button>

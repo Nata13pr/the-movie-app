@@ -1,6 +1,6 @@
-import React, {FC, useEffect, useState} from "react";
-
+import React, {FC, useEffect} from "react";
 import {useParams, useSearchParams} from "react-router-dom";
+
 import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks";
 import PaginationComponent from "../../components/pagination/PaginationComponent";
 import {movieActions} from "../../redux/slices/movieSlice";
@@ -29,7 +29,7 @@ const MoviesByGenrePage: FC = () => {
             <Box>
                 <Grid2 container spacing={1}>
                     {filteredMovie.map((movie) => (
-                     <MovieComponent movie={movie}/>
+                     <MovieComponent movie={movie}  key={movie.id}/>
                     ))}
                 </Grid2>
             </Box>
