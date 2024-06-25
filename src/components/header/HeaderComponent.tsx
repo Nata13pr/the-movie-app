@@ -18,7 +18,6 @@ const HeaderComponent = () => {
                 <AppBar position="static">
                     <Toolbar>
                         <UserInfoComponent/>
-
                         <IconButton
                             size="large"
                             edge="start"
