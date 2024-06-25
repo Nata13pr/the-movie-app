@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {Box, Rating, Typography} from "@mui/material";
-import {indigo} from "@mui/material/colors";
+import {yellow} from "@mui/material/colors";
 
 interface IProps {
     rating: number
@@ -16,7 +16,8 @@ const StarsRatingComponent: FC<IProps> = ({rating}) => {
                     max={10}
                     sx={{
                         fontSize: 50,
-                        color: indigo["500"]
+                        color: yellow
+                            ["100"]
                     }}/>
             <Typography
                 component={'p'}>
