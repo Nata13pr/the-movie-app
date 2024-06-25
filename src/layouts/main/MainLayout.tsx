@@ -20,7 +20,6 @@ const MainLayout = () => {
     const {switcher} = useAppSelector(state => state.movie);
 
     return (
-
         <ThemeProvider theme={switcher ? darkTheme : lightTheme}>
             <GlobalStyles />
             <Box sx={{
@@ -36,8 +35,6 @@ const MainLayout = () => {
                 </Container>
             </Box>
         </ThemeProvider>
-
-
     );
 };
 
